@@ -1,0 +1,49 @@
+class Solution {
+    
+    class Pair implements Comparable<Pair> {
+		int frequency;
+		int value;
+
+		Pair(int frequency, int value) {
+			this.frequency = frequency;
+			this.value = value;
+		}
+
+		@Override
+		public int compareTo(Pair o) {
+			return this.frequency < o.frequency ? -1 : +1;
+		}
+	}
+    
+	public int[] topKFrequent(int[] nums, int k) {
+
+// Hashmap stores Frequency->Value pair
+		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+		for (int num : nums) {
+			map.put(num, map.getOrDefault(num, 0) + 1);
+		}
+
+// Mminheap
+		PriorityQueue<Pair> heap = new PriorityQueue<>();
+
+		for (Integer key : map.keySet()) {
+			heap.add(new Pair(map.get(key), key));
+
+			if (heap.size() > k) {
+				heap.poll();
+			}
+		}
+
+		ArrayList<Integer> al = new ArrayList<>();
+		while (!heap.isEmpty()) {
+			al.add(heap.poll().value);
+		}
+
+		int[] arr = new int[al.size()];
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = al.get(i);
+		}
+		return arr;
+	}
+}
