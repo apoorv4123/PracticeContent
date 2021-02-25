@@ -2,6 +2,7 @@ package Heap;
 
 import java.util.ArrayList;
 // MIN-HEAP
+// Java has in-built class PriorityQueue which by default is minheap
 public class HeapGeneric<T extends Comparable<T>> {
 
 	ArrayList<T> data = new ArrayList<>();
