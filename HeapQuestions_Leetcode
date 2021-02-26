@@ -115,3 +115,30 @@ class Pair implements Comparable<Pair> {
 
 		return resultList;
 	}
+
+//Leetcode_1046
+	public static int lastStoneWeight(int[] stones) {
+
+		PriorityQueue<Integer> maxheap = new PriorityQueue<Integer>(Collections.reverseOrder());
+
+		for (int wt : stones) {
+			maxheap.add(wt);
+		}
+		int y = 0;
+		while (!maxheap.isEmpty()) {
+			y = maxheap.poll();
+			
+			if (maxheap.isEmpty()) {
+				maxheap.add(y);
+				break;
+			}
+			int x = maxheap.poll();
+
+			if (x != y) {
+				maxheap.add(y - x);
+			}
+
+		}
+
+		return (maxheap.isEmpty()) ? 0 : maxheap.poll();
+	}
