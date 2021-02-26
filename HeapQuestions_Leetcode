@@ -47,3 +47,71 @@ class Solution {
 		return arr;
 	}
 }
+
+//Leetcode_378
+public static int kthSmallest(int[][] matrix, int k) {
+		
+		PriorityQueue<Integer> heap = new PriorityQueue<Integer>(Collections.reverseOrder());
+		
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[0].length; j++) {
+				heap.offer(matrix[i][j]);
+				
+				if(heap.size() > k) {
+					heap.poll();
+				}
+				
+			}
+		}
+		return heap.remove();
+	}
+	
+//Leetcode_373
+class Pair implements Comparable<Pair> {
+		int sum;
+		int num1;
+		int num2;
+
+		public Pair(int num1, int num2) {
+			this.sum = num1 + num2;
+			this.num1 = num1;
+			this.num2 = num2;
+		}
+
+		@Override
+		public int compareTo(Pair o) {
+			return this.sum < o.sum ? -1 : +1;
+		}
+
+	}
+
+	public static List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+
+		Leetcode_373 l = new Leetcode_373();
+
+		List<List<Integer>> resultList = new ArrayList<List<Integer>>();
+
+		PriorityQueue<Pair> heap = new PriorityQueue<>(Collections.reverseOrder());
+
+		for (int i = 0; i < nums1.length; i++) {
+			for (int j = 0; j < nums2.length; j++) {
+				heap.offer(l.new Pair(nums1[i], nums2[j]));
+
+				if (heap.size() > k) {
+					heap.poll();
+				}
+
+			}
+		}
+
+		List<Integer> list;
+		while (!heap.isEmpty()) {
+			list = new ArrayList<Integer>();
+			Pair rp = heap.poll();
+			list.add(rp.num1);
+			list.add(rp.num2);
+			resultList.add(list);
+		}
+
+		return resultList;
+	}
