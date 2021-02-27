@@ -12,3 +12,33 @@
 		}
 		return 0;
 	}
+
+// Leetcode 202
+	public static boolean isHappy(int n) {
+
+		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+		while (true) {
+			System.out.println(n);
+			if (n == 1) {
+				return true;
+			}
+			if (map.containsKey(n)) {
+				return false;
+			}
+			int a = n;
+			int tnum = sq(n);
+			map.put(a, tnum);
+			n = tnum;
+		}
+
+	}
+
+	public static int sq(int n) {
+		int res = 0;
+		while (n != 0) {
+			res += (n % 10) * (n % 10);
+			n /= 10;
+		}
+		return res;
+	}
