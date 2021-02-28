@@ -82,3 +82,23 @@
 		}
 		return false;
 	}
+
+// Leetcode 219
+	public static boolean containsNearbyDuplicate(int[] nums, int k) {
+
+		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+		for (int currentIndex = 0; currentIndex < nums.length; currentIndex++) {
+			if (map.containsKey(nums[currentIndex])) {
+				int previousIndex = map.get(nums[currentIndex]);
+				if (currentIndex - previousIndex <= k) {
+					return true;
+				} else if (currentIndex - previousIndex > k) {
+					map.put(nums[currentIndex], currentIndex);
+				}
+			} else {
+				map.put(nums[currentIndex], currentIndex);
+			}
+		}
+		return false;
+	}
