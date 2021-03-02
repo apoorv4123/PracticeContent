@@ -32,3 +32,29 @@ class Solution {
         
         return slow;
     }
+
+// Leetcode 25
+    class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        
+        if(head == null){
+            return null;
+        }
+        
+        ListNode temp = head;
+        for(int i = 1; i<=k && temp != null; i++){
+            temp = temp.next;
+        }
+        
+        ListNode prev = reverseKGroup(temp,k);
+        ListNode curr = head;
+        
+        while(curr != temp){
+            ListNode ahead = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = ahead;
+        }
+        return prev;
+    }
+}
