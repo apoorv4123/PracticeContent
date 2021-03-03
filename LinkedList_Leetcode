@@ -85,6 +85,37 @@ class Solution {
     }
 }
 
+// Leetcode 82
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        
+        if(head == null || head.next == null){
+            return head;
+        }
+        
+        ListNode result = new ListNode(-101), tt = result;
+        // result.next = head;
+        ListNode temp = head;
+        while(temp != null){
+            ListNode t = temp;
+            int count = 1;
+            while(t!=null && t.next != null && t.val == t.next.val){
+                count++;
+                t = t.next;
+            }
+            if(count != 1){
+                temp = t.next;
+                continue;
+            }else{
+                tt.next = new ListNode(temp.val);
+                tt = tt.next;
+            }
+            temp = temp.next;
+        }
+        return result.next;
+    }
+}
+
 // Leetcode 83
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
