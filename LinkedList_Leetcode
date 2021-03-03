@@ -33,6 +33,32 @@ class Solution {
         return slow;
     }
 
+// Leetcode 24
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        
+        if(head == null){
+            return null;
+        }
+        
+        ListNode temp = head.next;
+        if(temp == null){
+            return head;
+        }        
+        temp = temp.next;
+        
+        ListNode prev = swapPairs(temp);
+        
+        ListNode curr = head;
+        ListNode ahead = curr.next;
+        
+        curr.next = prev;
+        ahead.next = curr;
+        
+        return ahead;
+    }
+}
+
 // Leetcode 25
     class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
