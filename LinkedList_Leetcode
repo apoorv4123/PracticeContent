@@ -84,3 +84,23 @@ class Solution {
         return prev;
     }
 }
+
+// Leetcode 83
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        
+        if(head == null || head.next == null){
+            return head;
+        }
+        
+        ListNode result = new ListNode(-101), temp = head, t1 = result;
+        while(temp != null){
+            if(temp.val != t1.val){
+                t1.next = new ListNode(temp.val);
+                t1 = t1.next;
+            }
+            temp = temp.next;
+        }
+        return result.next;
+    }
+}
