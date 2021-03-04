@@ -135,3 +135,26 @@ class Solution {
         return result.next;
     }
 }
+
+// Leetcode 203
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        
+        if(head == null){
+            return head;
+        }
+        
+        ListNode dummy = new ListNode(0), tt = dummy, temp = head;
+        
+        while(temp != null){
+            if(temp.val != val){
+                tt.next = temp;
+                tt = tt.next;
+            }
+            temp = temp.next;
+        }
+        tt.next = null;
+        return dummy.next;
+    
+    }
+}
