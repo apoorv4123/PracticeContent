@@ -183,3 +183,44 @@ class Solution {
         return prev;
     }
 }
+
+// Leetcode 234
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        
+        if(head == null || head.next == null){
+            return true;
+        }
+        
+        int len = 0;
+        ListNode temp = head;
+        while(temp != null){
+            len++;
+            temp = temp.next;
+        }
+        return isPalindrome(new heapmover(head),head,1,len);
+    }
+    
+    class heapmover{
+        ListNode left;
+        public heapmover(ListNode node){
+            left = node;
+        }
+    }
+    
+    public boolean isPalindrome(heapmover mover, ListNode right, int count, int len){
+        
+        if(right == null){
+            return true;
+        }
+        
+        boolean rr = isPalindrome(mover, right.next, count+1, len);
+        boolean res = true && rr;
+        
+        if(res && count > (len >> 1)){
+            res = res && (mover.left.val == right.val);
+            mover.left = mover.left.next;
+        }
+        return res;
+    }
+}
