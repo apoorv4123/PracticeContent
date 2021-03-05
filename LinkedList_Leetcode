@@ -263,5 +263,35 @@ class Solution {
         }
         return res;
     }
+}
+
+// Leetcode 143
+class Solution {
+    public void reorderList(ListNode head) {
+        
+        int len = 0;
+        ListNode temp = head;
+        while(temp != null){
+            len++;
+            temp = temp.next;
+        }
+        reorderList(head,head,0,len);
+    }
+    
+    public ListNode reorderList(ListNode left, ListNode right, int count, int len){
+        if(right == null){
+            return left;
+        }
+        ListNode l = reorderList(left,right.next,count + 1,len);
+        
+        if(count > len/2){
+            ListNode ahead = l.next;
+            l.next = right;
+            right.next = ahead;
+        }else if(count == len/2){
+            right.next = null;   
+        }
+        return right.next;
+    }
     
 }
