@@ -224,3 +224,44 @@ class Solution {
         return res;
     }
 }
+
+// Leetcode 1019
+class Solution {
+    public int[] nextLargerNodes(ListNode head) {
+        
+        if(head == null){
+            return new int[0];
+        }
+        
+        return solution(head, new Stack<Integer>(), 0);
+    }
+    
+    public int[] solution(ListNode head, Stack<Integer> stack, int i){
+        
+        if(head.next == null){
+            stack.push(head.val);
+            int[] res = new int[i + 1];
+            res[res.length - 1] = 0;
+            return res;
+        }
+        
+        int[] res = solution(head.next, stack, i + 1);
+        
+        if(stack.peek() > head.val){
+            res[i] = stack.peek();
+            stack.push(head.val);
+        }else{
+            while(!stack.isEmpty() && stack.peek() <= head.val){
+                stack.pop();
+            }
+            if(stack.isEmpty()){
+                res[i] = 0;
+            }else{
+                res[i] = stack.peek();   
+            }
+            stack.push(head.val);
+        }
+        return res;
+    }
+    
+}
