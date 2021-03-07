@@ -323,3 +323,29 @@ class Solution {
         return dummy.next;
     }
 }
+
+// Leetcode 1721
+class Solution {
+    public ListNode swapNodes(ListNode head, int k) {
+        
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode slow = dummy, fast = dummy, left = dummy;
+        
+        for(int i = 1; i<=k;i++){
+            fast = fast.next;
+        }
+        left = fast;
+        
+        while(fast != null){
+            slow = slow.next;
+            fast = fast.next;
+        }
+        
+        int temp = left.val;
+        left.val = slow.val;
+        slow.val = temp;
+        
+        return dummy.next;
+    }
+}
