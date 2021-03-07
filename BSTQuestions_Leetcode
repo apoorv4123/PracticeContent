@@ -1,1 +1,23 @@
-
+// Leetcode 538
+class Solution {
+    public int sum = 0;
+    public TreeNode convertBST(TreeNode root) {
+        if(root == null){
+            return root;
+        }
+        ques(root);
+        return root;
+    }
+    
+    public void ques(TreeNode root) {
+        
+        if(root.right != null){
+            ques(root.right);
+        }
+        sum = root.val + sum;
+        root.val = sum;
+        if(root.left != null){
+            ques(root.left);
+        }   
+    }   
+}
