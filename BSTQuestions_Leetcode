@@ -62,5 +62,36 @@ class Solution {
 
 		return sp;
 	}
+}
+
+// Leetcode 1382
+class Solution {
+    public TreeNode balanceBST(TreeNode root) {
+        ArrayList<Integer> al = in(root);
+        return construct(al,0,al.size() - 1);
+    }
+
+    public TreeNode construct(ArrayList<Integer> al, int lo, int hi){
+        
+        if(lo > hi){
+            return null;
+        }
+        
+        int mid = (lo+hi)/2;
+        
+        return new TreeNode(al.get(mid), construct(al,lo,mid - 1), construct(al,mid + 1,hi));
+    }
     
+    public ArrayList<Integer> in(TreeNode root) {
+            
+		if (root == null) {
+			return new ArrayList<>();
+		}
+
+		ArrayList<Integer> l = in(root.left);
+		l.add(root.val);
+		l.addAll(in(root.right));
+
+		return l;
+	}
 }
