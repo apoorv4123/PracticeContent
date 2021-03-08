@@ -21,3 +21,46 @@ class Solution {
         }   
     }   
 }
+
+// Leetcode 1373
+class Solution {
+    public int maxSumBST(TreeNode root) {
+        return MaximumSumBSTinBinaryTree(root).maxSumTillNow;
+    }
+    
+	public class maxBSTPair {
+		boolean isBST = true;
+		int maxSumTillNow = 0;
+		int subtreeSum = 0;
+		int max = Integer.MIN_VALUE;    // Stores maximum value os a subtree
+		int min = Integer.MAX_VALUE;    // stores minimum value of a subtree
+	}
+
+    private maxBSTPair MaximumSumBSTinBinaryTree(TreeNode node) {
+
+		if (node == null) {
+			return new maxBSTPair();
+		}
+
+		maxBSTPair l = MaximumSumBSTinBinaryTree(node.left);
+		maxBSTPair r = MaximumSumBSTinBinaryTree(node.right);
+
+		maxBSTPair sp = new maxBSTPair();
+
+		sp.max = Math.max(node.val, Math.max(l.max, r.max));
+		sp.min = Math.min(node.val, Math.min(l.min, r.min));
+		
+        if (node.val > l.max && node.val < r.min && l.isBST && r.isBST) {
+			sp.isBST = true;
+		} else {
+			sp.isBST = false;
+		}
+
+		sp.subtreeSum = l.subtreeSum + r.subtreeSum + node.val;
+		sp.maxSumTillNow = Math.max(sp.isBST ? sp.subtreeSum : Integer.MIN_VALUE,
+				Math.max(l.maxSumTillNow, r.maxSumTillNow));
+
+		return sp;
+	}
+    
+}
