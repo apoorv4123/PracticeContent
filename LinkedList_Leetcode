@@ -421,3 +421,33 @@ class Solution {
         return dummy.next;
     }
 }
+
+// Leetcode 109
+class Solution {
+    public TreeNode sortedListToBST(ListNode head) {
+        
+        ArrayList<Integer> al = new ArrayList<>();
+        ListNode temp = head;
+        while(temp != null){
+            al.add(temp.val);
+            temp = temp.next;
+        }
+        return construct(al, 0, al.size() - 1);
+    }
+    
+    public TreeNode construct(ArrayList<Integer> al, int lo, int hi){
+        
+        if(lo > hi){
+            return null;
+        }
+        
+        int mid = (lo + hi) / 2;
+        TreeNode sn = new TreeNode(al.get(mid));
+        
+        sn.left = construct(al, lo, mid - 1);
+        sn.right = construct(al, mid + 1, hi);
+        
+        return sn;
+        
+    }
+}
