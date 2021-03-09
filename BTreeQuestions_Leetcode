@@ -7,3 +7,32 @@ class Solution {
         return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;       
     }
 }
+
+// Leetcode 110
+class Solution {
+    
+     public boolean isBalanced(TreeNode root) {
+         return isbalanced(root).isbal;
+     }
+    
+    class isBPair{
+        boolean isbal = true;
+        int ht = 0;
+    }
+    
+    public isBPair isbalanced(TreeNode root) {
+        
+        if(root == null){
+            return new isBPair();
+        }
+        
+        isBPair l = isbalanced(root.left);
+        isBPair r = isbalanced(root.right);
+        
+        isBPair sp = new isBPair();
+        sp.isbal = l.isbal && r.isbal && (Math.abs(r.ht - l.ht) <= 1); 
+        sp.ht = Math.max(l.ht, r.ht) + 1;
+        
+        return sp;
+    }
+}
