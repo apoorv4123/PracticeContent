@@ -493,3 +493,30 @@ public class Solution {
         return null;
     }
 }
+
+// Leetcode 1669
+class Solution {
+    public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
+        
+        ListNode dummy = new ListNode(0);
+        dummy.next = list1;
+        ListNode temp = list1, former = dummy, latter = dummy;
+        for(int i = 0; temp != null; i++){
+            if(i == a - 1){
+                former = temp;
+            }else if(i == b + 1){
+                latter = temp;
+            }
+            temp = temp.next;
+        }
+        // System.out.println(former.val +" - "+ latter.val);
+        former.next = list2;
+        temp = list2;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        temp.next = latter;
+        
+        return dummy.next;
+    }
+}
