@@ -467,3 +467,29 @@ public class Solution {
         return false;
     }
 }
+
+// Leetcode 142
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        
+        ListNode slow = head, fast = head;
+        boolean isLoop = false;
+        while(fast != null && fast.next !=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                isLoop = true;
+                break;
+            }
+        }
+        if(isLoop){
+            slow = head;
+            while(slow != fast){
+                slow = slow.next;
+                fast = fast.next;
+            }
+            return slow;
+        }
+        return null;
+    }
+}
