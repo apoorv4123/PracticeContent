@@ -9,3 +9,50 @@ class Solution {
         return res;
     }
 }
+
+// Leetcode 784
+class Solution {
+    
+	public List<String> letterCasePermutation(String str) {
+
+		List<String> list = new ArrayList<String>();
+		letterCasePermutation(str, "", list);
+		return list;
+
+	}
+
+	public static void letterCasePermutation(String str, String ans, List<String> list) {
+
+		if (str.length() == 0) {
+			list.add(ans);
+			return;
+		}
+
+		char ch = str.charAt(0);
+		String ros = str.substring(1);
+
+		if (ch >= 'a' && ch <= 'z') {
+
+			// not replace
+			letterCasePermutation(ros, ans + ch, list);
+
+			// replace
+			letterCasePermutation(ros, ans + (char) ((int) ch - 32), list);
+
+		} else if (ch >= 'A' && ch <= 'Z') {
+
+			// not replace
+			letterCasePermutation(ros, ans + ch, list);
+
+			// replace
+			letterCasePermutation(ros, ans + (char) ((int) ch + 32), list);
+
+		} else {
+
+			letterCasePermutation(ros, ans + ch, list);
+
+		}
+
+	}
+
+}
