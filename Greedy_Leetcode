@@ -1,0 +1,52 @@
+// Leetcode_452
+class Solution {
+    
+// Runtime: 209 ms, faster than 5.02% of Java online submissions for Minimum Number of Arrows to Burst Balloons.
+// Memory Usage: 45.7 MB, less than 95.23% of Java online submissions for Minimum Number of Arrows to Burst Balloons.
+    
+    public int findMinArrowShots(int[][] points) {
+        
+        if(points.length == 0 || points.length == 1){
+            return points.length;
+        }
+        
+        Pair[] arr = new Pair[points.length];
+        int i;
+        for(i = 0; i < points.length; i++){
+            arr[i] = new Pair(points[i][0], points[i][1]);
+        }
+        insertionSort(arr);
+        int res = 1;
+        int prevball = arr[0].en;
+        for(i = 1; i < points.length; i++){
+            if(arr[i].st > prevball){
+                prevball = arr[i].en;
+                res++;
+            }
+        }
+        return res;
+    }
+    
+    public static void insertionSort(Pair[] arr) {
+		for (int counter = 1; counter <= arr.length - 1; counter++) {
+			Pair val = arr[counter];
+			int j = counter - 1;
+			while (j >= 0 && arr[j].en > val.en) {
+				arr[j + 1] = arr[j];
+				j--;
+			}
+			arr[j + 1] = val;
+		}
+	}
+
+	class Pair {
+		int st;
+		int en;
+
+		public Pair(int st, int en) {
+			this.st = st;
+			this.en = en;
+		}
+	}
+    
+}
